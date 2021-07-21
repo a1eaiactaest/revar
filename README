@@ -15,18 +15,28 @@ m16u2  = ATmega16U2
 
 both of those are arduino uno clones
 
-
 == tracking usb traffic with wireshark ==
 
 https://wiki.wireshark.org/CaptureSetup/USB#Linux
-
 
 == collecting raw text traces with usbmon ==
 
 https://mjmwired.net/kernel/Documentation/usb/usbmon.txt#23
 
-you can find arduino's t-line by running 
+# prepare
+sudo mount -t debugs none_debugs /sys/kernel/debug
+sudo modprobe usbmon
 
+# verify
+$ sudo ls /sys/kernel/debug/usb/usbmon
+
+`0s  0u  1s  1t  1u  2s  2t  2u  3s  3t  3u  4s  4t  4u`
+
+doesn't make any sense...
+
+let's get more information
+
+# finding info
 $ sudo cat /sys/kernel/debug/usb/devices | grep T:
 
 and comparing it with lsusb output
