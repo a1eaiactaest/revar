@@ -1,0 +1,18 @@
+== dependencies == 
+
+  * avrdude
+
+# avrdude chips
+
+chips.txt
+or 
+http://www.nongnu.org/avrdude/user-manual/avrdude_4.html
+
+# used by me
+
+at328p = ATmega328P
+m16u2  = ATmega16U2
+
+both of those are arduino uno clones
+
+
