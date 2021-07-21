@@ -16,3 +16,43 @@ m16u2  = ATmega16U2
 both of those are arduino uno clones
 
 
+== tracking usb traffic with wireshark ==
+
+https://wiki.wireshark.org/CaptureSetup/USB#Linux
+
+
+== collecting raw text traces with usbmon ==
+
+https://mjmwired.net/kernel/Documentation/usb/usbmon.txt#23
+
+you can find arduino's t-line by running 
+
+$ sudo cat /sys/kernel/debug/usb/devices | grep T:
+
+and comparing it with lsusb output
+
+arduino t-line can look like this:
+
+`T:  Bus=03 Lev=01 Prnt=01 Port=03 Cnt=03 Dev#=  5 Spd=12   MxCh= 0`
+
+and on lsusb:
+
+`Bus 003 Device 005: ID 2341:0043 Arduino SA Uno R3 (CDC ACM)`
+
+or you can just run full cat on (...)/usb/devices and just grep for arduino in it
+
+# example output
+
+```
+T:  Bus=03 Lev=01 Prnt=01 Port=03 Cnt=03 Dev#=  5 Spd=12   MxCh= 0
+D:  Ver= 1.10 Cls=02(comm.) Sub=00 Prot=00 MxPS= 8 #Cfgs=  1
+P:  Vendor=2341 ProdID=0043 Rev= 0.01
+S:  Manufacturer=Arduino (www.arduino.cc)
+S:  SerialNumber=8593731353035151F0B2
+C:* #Ifs= 2 Cfg#= 1 Atr=c0 MxPwr=100mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=02 Prot=01 Driver=cdc_acm
+E:  Ad=82(I) Atr=03(Int.) MxPS=   8 Ivl=255ms
+I:* If#= 1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_acm
+E:  Ad=04(O) Atr=02(Bulk) MxPS=  64 Ivl=0ms
+E:  Ad=83(I) Atr=02(Bulk) MxPS=  64 Ivl=0ms
+```
