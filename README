@@ -66,3 +66,17 @@ I:* If#= 1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_acm
 E:  Ad=04(O) Atr=02(Bulk) MxPS=  64 Ivl=0ms
 E:  Ad=83(I) Atr=02(Bulk) MxPS=  64 Ivl=0ms
 ```
+
+== avrdude == 
+
+`avrdude -F -v -p m16u2 -c stk500v1 -P /dev/ttyUSB0 -b 19200 -D -U flash:r:output.bin:r
+
+-p : atmel version, more above
+-c : programmer id, stk500 is most common
+-P : port on which arduino is connected, in my case usually /dev/ttyUSB0 or /dev/ttyATM0
+-b : baudrate, 19200 is common
+-D : disable auto erase for flash
+-U : perform a memory operation as indicated, memtype:op:filename 
+
+source:
+https://linux.die.net/man/1/avrdude
